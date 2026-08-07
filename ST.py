@@ -18,7 +18,7 @@ while True:
         subscriptions.append(item)
         print(f"Added {name}! You have {days_left} days left till subscription ends.")
 
-    elif choice == "2":
+    elif choice == "2": 
 
         today = date.today()
 
