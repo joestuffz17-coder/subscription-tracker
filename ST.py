@@ -15,13 +15,17 @@ while True:
         for sub in subscriptions:
             print(f"Subscription: {sub[0]}, expires on {sub[1]}.")
     elif choice == "3":
+        print("--- Delete Subscription ---")
         for index, sub in enumerate(subscriptions):
+
+            print(f"{index}: {sub[0]}, expires on {sub[1]}")
             print()
-            print(f"Subscription: {sub[0]}, expires on {sub[1]}.")
-            print()
-            print(index, sub)
-        delete = input("Which number do you want to delete? ")
-                    
+        delete = int(input("Which number do you want to delete? "))
+        if 0 <= delete < len(subscriptions):
+            subscriptions.pop(delete)     
+            print("Successfully deleted!")    
+        else:
+            print("Invalid number Returning to main menu.")
     elif choice == "4":
         print()
         print("goodbye!")
