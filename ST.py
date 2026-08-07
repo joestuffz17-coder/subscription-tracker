@@ -1,19 +1,32 @@
 subscriptions = []
-
+from datetime import datetime, date 
 
 while True:
     print()
     choice = input("1. Add subscription.\n2. View all subscription.\n3. Delete subscription.\n4. Exit\nChoose: ")
     print()
+
     if choice == "1":
         name = input("Enter subscription name: ")
-        date = input("Expiry date: ")
+        la_date = input("Expiry date (MM-DD-YYYY): ")
         print()
-        item = [name, date]
+        today = date.today()
+        expiry = datetime.strptime(la_date, "%m-%d-%Y").date()
+        days_left = (expiry - today).days
+        print()
+        item = [name, expiry]
         subscriptions.append(item)
+        print(f"Added {name}! You have {days_left} days left to cancel.")
+
     elif choice == "2":
+
+        today = date.today()
+
         for sub in subscriptions:
-            print(f"Subscription: {sub[0]}, expires on {sub[1]}.")
+            days_left = (sub[1] - today).days
+            print(f"Subscription: {sub[0]}, expires on {sub[1]} ({days_left} days left!)" )
+
+
     elif choice == "3":
         if len(subscriptions) == 0:
             print("Nothing to delete. Your list is empty.")
@@ -29,6 +42,7 @@ while True:
                 print("Successfully deleted!")    
             else:
                 print("Invalid number. Returning to main menu.")
+
     elif choice == "4":
         print()
         print("goodbye!")
