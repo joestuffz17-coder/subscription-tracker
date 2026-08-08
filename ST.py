@@ -29,7 +29,13 @@ while True:
         la_date = input("Expiry date (MM-DD-YYYY): ")
         print()
         today = date.today()
-        expiry = datetime.strptime(la_date, "%m-%d-%Y").date()
+
+        try:
+            expiry = datetime.strptime(la_date, "%m-%d-%Y").date()
+        except ValueError:
+            print("Invalid date format! Use MM-DD-YYYY. Returning to menu.")
+            continue
+
         days_left = (expiry - today).days
         print()
         item = [name, expiry]
@@ -60,9 +66,13 @@ while True:
             for index, sub in enumerate(subscriptions):
 
                 print(f"{index}: {sub[0]}, expires on {sub[1]}")
-                print()
-            delete = int(input("Which number do you want to delete? "))
 
+                print()
+            try: 
+                delete = int(input("Which number do you want to delete? "))
+            except ValueError:
+                print("Invalid input! Please enter a valid index number.")
+                continue
 
             
             if 0 <= delete < len(subscriptions):
